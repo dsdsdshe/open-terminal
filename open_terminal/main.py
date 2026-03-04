@@ -24,7 +24,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel, Field
 from pypdf import PdfReader
 
-from open_terminal.env import API_KEY, BINARY_FILE_MIME_PREFIXES, CORS_ALLOWED_ORIGINS, ENABLE_TERMINAL, LOG_DIR, MAX_TERMINAL_SESSIONS, TERMINAL_TERM
+from open_terminal.env import API_KEY, BINARY_FILE_MIME_PREFIXES, CORS_ALLOWED_ORIGINS, ENABLE_TERMINAL, EXECUTE_TIMEOUT, LOG_DIR, MAX_TERMINAL_SESSIONS, TERMINAL_TERM
 from open_terminal.runner import PipeRunner, ProcessRunner, create_runner
 
 try:
@@ -991,6 +991,8 @@ async def execute(
     background_process.log_task = asyncio.create_task(_log_process(background_process))
     _processes[process_id] = background_process
 
+    if wait is None and EXECUTE_TIMEOUT:
+        wait = EXECUTE_TIMEOUT
     if wait is not None:
         try:
             await asyncio.wait_for(
@@ -1047,6 +1049,8 @@ async def get_status(
 ):
     background_process = _get_process(process_id)
 
+    if wait is None and EXECUTE_TIMEOUT:
+        wait = EXECUTE_TIMEOUT
     if wait is not None and background_process.status == "running":
         try:
             await asyncio.wait_for(

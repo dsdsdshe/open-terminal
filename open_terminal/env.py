@@ -75,3 +75,11 @@ TERMINAL_TERM = os.environ.get(
     "OPEN_TERMINAL_TERM",
     config.get("term", "xterm-256color"),
 )
+
+EXECUTE_TIMEOUT: float | None = None
+_execute_timeout = os.environ.get(
+    "OPEN_TERMINAL_EXECUTE_TIMEOUT",
+    config.get("execute_timeout"),
+)
+if _execute_timeout is not None:
+    EXECUTE_TIMEOUT = float(_execute_timeout)

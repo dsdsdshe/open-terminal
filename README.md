@@ -69,6 +69,7 @@ api_key = "sk-my-secret-key"
 cors_allowed_origins = "*"
 log_dir = "/var/log/open-terminal"
 binary_mime_prefixes = "image,audio"
+execute_timeout = 5  # seconds to wait for command output (unset by default)
 ```
 
 > [!TIP]
