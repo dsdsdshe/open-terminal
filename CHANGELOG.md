@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.9.2] - 2026-03-05
+
+### Added
+
+- 📝 **Custom execute description** — new `OPEN_TERMINAL_EXECUTE_DESCRIPTION` environment variable (or `execute_description` in config.toml) appends custom text to the execute endpoint's OpenAPI description, letting you tell AI models about installed tools, capabilities, or conventions.
+
 ## [0.9.1] - 2026-03-05
 
 ### Added

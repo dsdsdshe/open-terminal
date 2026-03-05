@@ -24,7 +24,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel, Field
 from pypdf import PdfReader
 
-from open_terminal.env import API_KEY, BINARY_FILE_MIME_PREFIXES, CORS_ALLOWED_ORIGINS, ENABLE_TERMINAL, EXECUTE_TIMEOUT, LOG_DIR, MAX_TERMINAL_SESSIONS, TERMINAL_TERM
+from open_terminal.env import API_KEY, BINARY_FILE_MIME_PREFIXES, CORS_ALLOWED_ORIGINS, ENABLE_TERMINAL, EXECUTE_DESCRIPTION, EXECUTE_TIMEOUT, LOG_DIR, MAX_TERMINAL_SESSIONS, TERMINAL_TERM
 from open_terminal.runner import PipeRunner, ProcessRunner, create_runner
 
 try:
@@ -53,6 +53,8 @@ _EXECUTE_DESCRIPTION = (
     "Run a shell command in the background and return a command ID.\n\n"
     + get_system_info()
 )
+if EXECUTE_DESCRIPTION:
+    _EXECUTE_DESCRIPTION += "\n\n" + EXECUTE_DESCRIPTION
 
 bearer_scheme = HTTPBearer(auto_error=False)
 

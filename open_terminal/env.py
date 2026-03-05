@@ -83,3 +83,8 @@ _execute_timeout = os.environ.get(
 )
 if _execute_timeout is not None:
     EXECUTE_TIMEOUT = float(_execute_timeout)
+
+EXECUTE_DESCRIPTION = os.environ.get(
+    "OPEN_TERMINAL_EXECUTE_DESCRIPTION",
+    config.get("execute_description", ""),
+)
