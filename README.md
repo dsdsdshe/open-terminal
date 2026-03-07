@@ -133,15 +133,16 @@ Users can connect their own Open Terminal instance from their user settings. Thi
 2. Add the terminal **URL** and **API key**
 3. Enable the connection
 
-### System-Level Connection
+### System-Level Connection (Multi-User)
 
-Admins can configure Open Terminal connections for their users from the admin panel. Multiple terminals can be set up with access controlled at the user or group level. Requests are proxied through the Open WebUI **backend**, so the terminal only needs to be reachable from the server.
+Admins can configure Open Terminal connections for all their users from the admin panel. No additional services required. Multiple terminals can be set up with access controlled at the user or group level. Requests are proxied through the Open WebUI **backend**, so the terminal only needs to be reachable from the server.
 
 1. Go to **Admin Settings → Integrations → Open Terminal**
 2. Add the terminal **URL** and **API key**
 3. Enable the connection
 
-For isolated, per-user terminal containers, see **[Terminals](https://github.com/open-webui/terminals)**, which requires an enterprise license for production use.
+> [!TIP]
+> You can set up multi-user access yourself by running one Open Terminal per user or group. For automatic per-user container isolation, the **[Terminals](https://github.com/open-webui/terminals)** add-on is also available.
 
 ## API Docs
 
