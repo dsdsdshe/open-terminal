@@ -26,26 +26,23 @@ That's it — you're up and running at `http://localhost:8000`.
 
 #### Image Variants
 
-| Tag | Base | What's included | Size |
+| | `latest` | `slim` | `alpine` |
 |---|---|---|---|
-| `latest` | Debian | Full toolkit — Python, Node.js, git, Docker CLI, ffmpeg, data science libs, and more | ~2 GB |
-| `slim` | Debian slim | Terminal API + git, curl, jq. No Node.js, no Docker CLI, no sudo. | ~200 MB |
-| `alpine` | Alpine | Same as slim but on Alpine Linux with musl libc. Smallest possible image. | ~100 MB |
+| **Best for** | AI agent sandboxes | Production / hardened | Edge / CI / minimal footprint |
+| **Size** | ~2 GB | ~500 MB | ~300 MB |
+| **Bundled tooling** | Node.js, gcc, ffmpeg, LaTeX, Docker CLI, data science libs | git, curl, jq | git, curl, jq |
+| **Install packages at runtime** | ✔ (has `sudo`) | ✘ | ✘ |
+| **Multi-user / egress firewall** | ✔ | ✔ | ✔ |
+
+**`slim`** and **`alpine`** have the same feature set. Slim uses Debian (glibc) for broader binary compatibility; Alpine uses musl libc and is smaller, but some C-extension pip packages may need to compile from source.
 
 ```bash
-# Slim — minimal Debian-based image
-docker run -d --name open-terminal -p 8000:8000 \
-  -e OPEN_TERMINAL_API_KEY=your-secret-key \
-  ghcr.io/open-webui/open-terminal:slim
-
-# Alpine — smallest image
-docker run -d --name open-terminal -p 8000:8000 \
-  -e OPEN_TERMINAL_API_KEY=your-secret-key \
-  ghcr.io/open-webui/open-terminal:alpine
+docker run -d -p 8000:8000 -e OPEN_TERMINAL_API_KEY=secret ghcr.io/open-webui/open-terminal:slim
+docker run -d -p 8000:8000 -e OPEN_TERMINAL_API_KEY=secret ghcr.io/open-webui/open-terminal:alpine
 ```
 
 > [!NOTE]
-> The slim and Alpine images do **not** support `OPEN_TERMINAL_PACKAGES` or `OPEN_TERMINAL_PIP_PACKAGES` runtime installs. To add packages, build a custom image based on the slim/Alpine Dockerfile.
+> Slim and Alpine don't support `OPEN_TERMINAL_PACKAGES` / `OPEN_TERMINAL_PIP_PACKAGES`. To add packages, extend [Dockerfile.slim](Dockerfile.slim) or [Dockerfile.alpine](Dockerfile.alpine).
 
 #### Updating
 
