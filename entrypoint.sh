@@ -64,7 +64,11 @@ fi
 # Auto-install Python packages
 if [ -n "${OPEN_TERMINAL_PIP_PACKAGES:-}" ]; then
     echo "Installing pip packages: $OPEN_TERMINAL_PIP_PACKAGES"
-    pip install --no-cache-dir $OPEN_TERMINAL_PIP_PACKAGES
+    if [ "${OPEN_TERMINAL_MULTI_USER:-false}" = "true" ]; then
+        sudo pip install --no-cache-dir $OPEN_TERMINAL_PIP_PACKAGES
+    else
+        pip install --no-cache-dir $OPEN_TERMINAL_PIP_PACKAGES
+    fi
 fi
 
 # -----------------------------------------------------------------------

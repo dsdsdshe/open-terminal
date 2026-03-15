@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.11.17] - 2026-03-14
+
+### Fixed
+
+- 🌐 **Global pip packages in multi-user mode** — `OPEN_TERMINAL_PIP_PACKAGES` now installs to the system-wide site-packages (`sudo pip install`) when `OPEN_TERMINAL_MULTI_USER=true`, so all provisioned users share the same packages. Previously, packages were installed to `/home/user/.local/` and only accessible to the default user. ([#68](https://github.com/open-webui/open-terminal/issues/68))
+
 ## [0.11.16] - 2026-03-13
 
 ### Removed
