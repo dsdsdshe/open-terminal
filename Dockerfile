@@ -40,17 +40,17 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Preinstall Node packages commonly needed in terminal sessions.
-RUN npm install -g pptxgenjs
-
-ENV NODE_PATH=/usr/lib/node_modules
-
 # Preconfigure npm for internal-network deployments.
 RUN { \
         printf 'strict-ssl=false\n'; \
         printf 'registry=https://mirrors.tools.huawei.com/npm/\n'; \
     } > /etc/npmrc \
     && npm cache clean --force
+
+# Preinstall Node packages commonly needed in terminal sessions.
+RUN npm install -g pptxgenjs
+
+ENV NODE_PATH=/usr/lib/node_modules
 
 # Docker CLI + Compose + Buildx (mount socket at runtime for access)
 RUN curl -fsSL https://get.docker.com | sh
